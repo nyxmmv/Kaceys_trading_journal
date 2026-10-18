@@ -1,0 +1,12 @@
+'use client';
+import {useId,useState,cloneElement,isValidElement,type ReactNode,type ReactElement} from 'react';
+import {Input} from '@/components/ui/input';
+import {Textarea} from '@/components/ui/textarea';
+export function Field({label,hint,children}:{label:string;hint?:string;children:ReactNode}){
+ const id=useId(),[error,setError]=useState('');const control=isValidElement(children)?cloneElement(children as ReactElement<Record<string,unknown>>,{id,'aria-labelledby':id+'-label','aria-describedby':[hint?id+'-hint':'',error?id+'-error':''].filter(Boolean).join(' ')||undefined,'aria-invalid':error?true:undefined}):children;
+ return <label className="field" htmlFor={id} onInvalid={event=>setError((event.target as HTMLInputElement).validationMessage)} onInput={()=>setError('')}><span id={id+'-label'}>{label}</span>{hint&&<span className="hint" id={id+'-hint'}>{hint}</span>}<span className="control-surface">{control}</span>{error&&<span className="field-error" id={id+'-error'}>Error: {error}</span>}</label>
+}
+export function TextField({label,value,onChange,hint,type='text',required=false,disabled=false,step}:{label:string;value:string|number|undefined|null;onChange:(v:string)=>void;hint?:string;type?:string;required?:boolean;disabled?:boolean;step?:string}){return <Field label={label} hint={hint}><Input type={type} value={value??''} onChange={e=>onChange(e.target.value)} required={required} disabled={disabled} step={step}/></Field>}
+export function AreaField({label,value,onChange,hint,rows=3}:{label:string;value:string;onChange:(v:string)=>void;hint?:string;rows?:number}){return <Field label={label} hint={hint}><Textarea rows={rows} value={value} onChange={e=>onChange(e.target.value)}/></Field>}
+export function Choice({label,value,onChange,options}:{label:string;value:string;onChange:(v:string)=>void;options:(string|{value:string;label:string})[]}){return <Field label={label}><select value={value} onChange={e=>onChange(e.target.value)}>{options.map(o=>{const v=typeof o==='string'?o:o.value;return <option key={v} value={v}>{typeof o==='string'?o:o.label}</option>})}</select></Field>}
+export function Check({label,checked,onChange}:{label:string;checked:boolean;onChange:(v:boolean)=>void}){return <label className="check-row"><span className="check-control"><input type="checkbox" checked={checked} onChange={e=>onChange(e.target.checked)}/></span><span>{label}</span></label>}

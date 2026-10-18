@@ -1,0 +1,26 @@
+Corrected journal files, 6 October 2026
+
+Each file contains its complete corrected contents, not a patch. Paths match the existing project. No backend schema or trading calculations changed.
+
+Changes
+1. app/globals.css: replaced conflicting desktop/mobile overrides with a token-based, mobile-first layout and reset. Added squircle surfaces with native corner-shape, SVG-mask paint fallback, and border-radius fallback. Focus rings and content are not masked.
+2. app/page.tsx: removed the fixed sidebar and bottom navigation, moved navigation into a native labeled select, and replaced editor popups with full-page screens. Preserved all journal views and workflows. Added a skip link, persistent text-size settings, system-theme synchronization, and optional single-key shortcuts.
+3. components/journal/editors.tsx: added labeled form steps, responsive fields, safe validation of hidden required inputs, full-page editing, and explicit draft-discard confirmation.
+4. components/journal/fields.tsx: added explicit label and help associations, visible inline native-validation errors, and accessible control wrappers.
+5. components/journal/confirmation.tsx: added two-step destructive confirmation naming the item and consequence, with safe default focus, keyboard focus trapping, Escape cancellation, and focus restoration.
+6. components/journal/feedback.tsx: replaced timed popup toasts with persistent inline messages and explicit close buttons.
+7. components/journal/importer.tsx: separated source, mapping, and preview into three labeled screens; retained import, mapping templates, deduplication, and batch undo. Batch removal uses double confirmation.
+8. components/journal/charts.tsx: removed floating tooltips, added labeled exact-value tables, solid/dashed lines, hatched losses, token colors, and continuous-corner bar paths. Chart animations remain disabled.
+9. components/ui/button.tsx, input.tsx, textarea.tsx: removed competing fixed-height utility classes and use shared control styles and 44px targets.
+10. tests/design-audit.mjs: checks design source constraints, theme contrast, and fluid-grid geometry alongside the existing P&L and workflow tests.
+
+Contrast color adjustments
+Light borders: #d4d4d4 to #7a7a7a. Light input boundaries: #b8b8b8 to #7a7a7a. Light focus ring: #737373 to #595959.
+Dark borders: #363636 to #888888. Dark input boundaries: #484848 to #888888. Dark focus ring: #a3a3a3 to #cccccc.
+All other brand and status colors are preserved.
+
+Validation
+TypeScript, P&L tests, and workflow tests passed. Checked theme text pairs have a minimum contrast of 4.99:1; checked boundary and focus pairs have a minimum of 3.41:1.
+Fluid-grid geometry checked at 320, 375, 768, 1024, 1440, and 1920 CSS pixels, with text scales of 100%, 200%, and 250%. This is source and geometry validation, not browser screenshot testing.
+Source supports prefers-color-scheme, prefers-contrast, prefers-reduced-motion, prefers-reduced-transparency, and forced-colors. No !important rules, negative margins, timed UI dismissal, or automatic chart animation remain in the active journal styles and components.
+Live Safari, Chrome, Firefox, Edge, viewport rendering, 400% zoom, and assistive-technology testing remain unverified because browser testing is unavailable. Native operating-system control menus may retain platform shapes.

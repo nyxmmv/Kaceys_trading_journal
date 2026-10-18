@@ -1,0 +1,14 @@
+Kacey's Trading Journal source archive
+
+This archive combines the full source ZIP previously saved for the project with the latest corrected files from 6 October 2026. Corrected files overwrite matching paths from the base archive.
+
+Project: Next.js / TypeScript trading journal
+
+To work locally:
+1. Install a current Node.js LTS release.
+2. Open a terminal in this folder.
+3. Install dependencies using the package manager indicated by the project lockfile.
+4. Review README.md and DEVELOPMENT.md for setup and environment requirements.
+5. Run the available checks before deployment.
+
+The ZIP contains source code, not a copy of the hosted site's private runtime data or credentials. Keep environment secrets out of version control.
